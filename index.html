@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bella Nails — Nail Studio</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --pink-dark:#880e4f;
+    --pink-mid:#c2185b;
+    --pink-bright:#e91e8c;
+    --pink-light:#fce4ec;
+    --pink-pale:#fdf6f9;
+    --pink-border:#f8bbd0;
+    --pink-accent:#f48fb1;
+    --text-main:#3d1a2e;
+    --text-soft:#6d3050;
+    --white:#ffffff;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--white);color:var(--text-main);}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:0.5px solid var(--pink-border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:58px;}
+  .nav-logo{font-size:1.2rem;color:var(--pink-dark);font-weight:600;font-family:Georgia,serif;letter-spacing:1px;}
+  .nav-links{display:flex;gap:24px;list-style:none;}
+  .nav-links a{text-decoration:none;font-size:14px;color:var(--text-soft);transition:color 0.2s;}
+  .nav-links a:hover{color:var(--pink-bright);}
+  .nav-cta{background:var(--pink-bright);color:#fff;border:none;padding:8px 20px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit;transition:background 0.2s;}
+  .nav-cta:hover{background:var(--pink-dark);}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#fce4ec 0%,#fdf6f9 55%,#fce4ec 100%);text-align:center;padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
+  .hero::after{content:'✦';position:absolute;top:2rem;right:3rem;font-size:48px;color:#f8bbd0;opacity:0.5;}
+  .hero::before{content:'✦';position:absolute;bottom:2rem;left:3rem;font-size:32px;color:#f8bbd0;opacity:0.4;}
+  .hero-tag{display:inline-block;background:var(--pink-bright);color:#fff;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:4px 16px;border-radius:20px;margin-bottom:1.2rem;}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:400;color:var(--pink-dark);font-family:Georgia,serif;line-height:1.15;margin-bottom:0.8rem;}
+  .hero p{font-size:16px;color:var(--pink-mid);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;}
+  .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:var(--pink-bright);color:#fff;border:none;padding:12px 28px;border-radius:30px;font-size:15px;cursor:pointer;font-family:inherit;transition:background 0.2s;text-decoration:none;display:inline-block;}
+  .btn-primary:hover{background:var(--pink-dark);}
+  .btn-outline{background:transparent;color:var(--pink-bright);border:1.5px solid var(--pink-bright);padding:12px 28px;border-radius:30px;font-size:15px;cursor:pointer;font-family:inherit;transition:all 0.2s;text-decoration:none;display:inline-block;}
+  .btn-outline:hover{background:var(--pink-light);}
+
+  /* SECTIONS */
+  section{padding:4rem 2rem;}
+  .container{max-width:960px;margin:0 auto;}
+  .section-tag{display:block;text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--pink-accent);margin-bottom:0.5rem;}
+  .section-title{text-align:center;font-size:clamp(1.5rem,3vw,2rem);font-weight:400;color:var(--pink-dark);font-family:Georgia,serif;margin-bottom:0.5rem;}
+  .section-sub{text-align:center;font-size:14px;color:var(--text-soft);margin-bottom:2.5rem;}
+
+  /* SERVICES */
+  .services{background:var(--pink-pale);}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+  .svc-card{background:var(--white);border:0.5px solid var(--pink-border);border-radius:16px;padding:1.5rem 1.2rem;text-align:center;transition:transform 0.2s,box-shadow 0.2s;}
+  .svc-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(233,30,140,0.08);}
+  .svc-icon{font-size:36px;margin-bottom:0.8rem;display:block;}
+  .svc-name{font-size:15px;font-weight:600;color:var(--pink-dark);margin-bottom:4px;}
+  .svc-price{font-size:14px;color:var(--pink-bright);font-weight:600;margin-bottom:6px;}
+  .svc-desc{font-size:13px;color:var(--text-soft);line-height:1.5;}
+
+  /* GALLERY */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .gallery-item{border-radius:16px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;cursor:pointer;}
+  .gallery-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(136,14,79,0.7));color:#fff;font-size:12px;font-weight:500;padding:8px;text-align:center;}
+
+  /* BOOKING */
+  .booking{background:var(--pink-pale);}
+  .booking-box{background:var(--white);border:0.5px solid var(--pink-border);border-radius:20px;padding:2.5rem;max-width:640px;margin:0 auto;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .form-group{display:flex;flex-direction:column;gap:6px;}
+  .form-group label{font-size:12px;font-weight:600;color:var(--pink-dark);}
+  .form-group input,.form-group select{border:0.5px solid var(--pink-border);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;color:var(--text-main);outline:none;width:100%;transition:border-color 0.2s;}
+  .form-group input:focus,.form-group select:focus{border-color:var(--pink-bright);}
+  .slots-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;}
+  .slot{background:var(--pink-pale);border:1px solid var(--pink-border);border-radius:20px;padding:6px 16px;font-size:13px;color:var(--pink-mid);cursor:pointer;transition:all 0.15s;}
+  .slot:hover,.slot.sel{background:var(--pink-bright);color:#fff;border-color:var(--pink-bright);}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .testi-card{background:var(--white);border:0.5px solid var(--pink-border);border-radius:16px;padding:1.5rem;}
+  .stars{color:var(--pink-accent);font-size:14px;margin-bottom:8px;}
+  .testi-text{font-size:14px;color:var(--text-soft);line-height:1.6;margin-bottom:10px;font-style:italic;}
+  .testi-name{font-size:13px;font-weight:600;color:var(--pink-dark);}
+
+  /* ADMIN PANEL */
+  .admin{background:var(--pink-pale);}
+  .admin-box{background:var(--white);border:0.5px solid var(--pink-border);border-radius:20px;overflow:hidden;}
+  .admin-tabs{display:flex;border-bottom:0.5px solid var(--pink-border);}
+  .admin-tab{flex:1;padding:12px;text-align:center;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:var(--text-soft);transition:all 0.15s;}
+  .admin-tab.active{color:var(--pink-dark);border-bottom-color:var(--pink-bright);font-weight:600;}
+  .admin-content{padding:1.5rem;}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem;}
+  .stat-card{background:var(--pink-pale);border-radius:10px;padding:12px;text-align:center;}
+  .stat-num{font-size:22px;font-weight:700;color:var(--pink-dark);}
+  .stat-lbl{font-size:11px;color:var(--pink-mid);margin-top:2px;}
+  .week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+  .week-label{font-size:14px;font-weight:600;color:var(--pink-dark);}
+  .nav-btn{background:var(--pink-light);border:none;color:var(--pink-dark);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-family:inherit;}
+  .nav-btn:hover{background:var(--pink-border);}
+  .week-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+  .day-col{background:var(--pink-pale);border:0.5px solid var(--pink-border);border-radius:12px;overflow:hidden;}
+  .day-header{background:var(--pink-light);padding:7px;font-size:11px;font-weight:600;color:var(--pink-dark);text-align:center;border-bottom:0.5px solid var(--pink-border);}
+  .day-body{padding:6px;min-height:70px;display:flex;flex-direction:column;gap:5px;}
+  .turno-chip{border-radius:8px;padding:5px 7px;font-size:10px;cursor:pointer;background:var(--pink-light);}
+  .chip-hora{color:var(--pink-mid);font-size:9px;}
+  .chip-nombre{font-weight:600;color:var(--pink-dark);}
+  .chip-estado{display:inline-block;font-size:9px;padding:1px 5px;border-radius:8px;margin-top:2px;}
+  .empty-day{font-size:10px;color:#ccc;text-align:center;padding:8px 0;}
+  .lista-header{display:grid;grid-template-columns:100px 130px 1fr 110px 90px;gap:8px;padding:8px 12px;font-size:11px;color:var(--pink-mid);font-weight:600;border-bottom:0.5px solid var(--pink-border);}
+  .lista-row{display:grid;grid-template-columns:100px 130px 1fr 110px 90px;gap:8px;padding:10px 12px;font-size:13px;border-bottom:0.5px solid var(--pink-pale);align-items:center;}
+  .lista-row:hover{background:var(--pink-pale);}
+  .estado-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;display:inline-block;}
+  .accion-btn{font-size:10px;border:none;border-radius:6px;padding:3px 7px;cursor:pointer;font-family:inherit;}
+  .toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--pink-bright);color:#fff;padding:10px 24px;border-radius:20px;font-size:14px;z-index:999;box-shadow:0 4px 16px rgba(233,30,140,0.3);}
+  .toast.show{display:block;}
+
+  /* FOOTER */
+  footer{background:var(--pink-dark);color:#fff;text-align:center;padding:3rem 2rem;}
+  .footer-logo{font-size:1.5rem;font-family:Georgia,serif;margin-bottom:0.5rem;}
+  .footer-info{font-size:13px;opacity:0.8;margin-top:6px;line-height:1.8;}
+  .footer-socials{display:flex;justify-content:center;gap:20px;margin-top:1rem;}
+  .footer-socials a{color:#fff;text-decoration:none;font-size:20px;opacity:0.8;}
+  .footer-socials a:hover{opacity:1;}
+  .footer-divider{border:none;border-top:0.5px solid rgba(255,255,255,0.2);margin:1.5rem 0;}
+  .footer-copy{font-size:12px;opacity:0.5;}
+
+  @media(max-width:600px){
+    .form-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .week-grid{grid-template-columns:repeat(3,1fr);}
+    .lista-header,.lista-row{grid-template-columns:80px 1fr 80px;}
+    .lista-header span:nth-child(3),.lista-row span:nth-child(3),
+    .lista-header span:nth-child(5),.lista-row span:nth-child(5){display:none;}
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    nav .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">✦ Bella Nails</div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#reservas">Reservas</a></li>
+    <li><a href="#admin">Administrar</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('reservas').scrollIntoView({behavior:'smooth'})">Reservar turno</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Nail Studio</div>
+  <h1>Uñas que hablan<br>por vos</h1>
+  <p>Diseños únicos, calidad premium y amor en cada detalle 💅</p>
+  <div class="hero-btns">
+    <a href="#reservas" class="btn-primary">Reservar turno</a>
+    <a href="#galeria" class="btn-outline">Ver diseños</a>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="services" id="servicios">
+  <div class="container">
+    <span class="section-tag">Lo que hacemos</span>
+    <h2 class="section-title">Nuestros servicios</h2>
+    <p class="section-sub">Todo lo que tus uñas necesitan, en un solo lugar</p>
+    <div class="services-grid">
+      <div class="svc-card">
+        <span class="svc-icon">✨</span>
+        <div class="svc-name">Esmaltado semipermanente</div>
+        <div class="svc-price">desde $8.000</div>
+        <div class="svc-desc">Dura hasta 3 semanas. Curado con lámpara UV/LED. +200 colores.</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">💎</span>
+        <div class="svc-name">Esculpidas en gel</div>
+        <div class="svc-price">desde $15.000</div>
+        <div class="svc-desc">Uñas largas y resistentes modeladas a mano. Duran 4-5 semanas.</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🌸</span>
+        <div class="svc-name">Nail art</div>
+        <div class="svc-price">desde $5.000</div>
+        <div class="svc-desc">Diseños a mano alzada, efecto cromo, encapsulados y más.</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🌷</span>
+        <div class="svc-name">Manicura tradicional</div>
+        <div class="svc-price">desde $4.500</div>
+        <div class="svc-desc">Cutícula, lima, masaje de manos y esmaltado incluido.</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🦶</span>
+        <div class="svc-name">Pedicura completa</div>
+        <div class="svc-price">desde $6.500</div>
+        <div class="svc-desc">Baño, exfoliación, cutícula, masaje y esmaltado.</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">💆</span>
+        <div class="svc-name">Tratamiento de keratina</div>
+        <div class="svc-price">desde $7.000</div>
+        <div class="svc-desc">Fortalece y repara uñas frágiles. Ciclo de 3 sesiones.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="container">
+    <span class="section-tag">Nuestros trabajos</span>
+    <h2 class="section-title">Galería de diseños</h2>
+    <p class="section-sub">Inspirate con los trabajos de Bella Nails</p>
+    <div class="gallery-grid">
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);">🌸<span class="gallery-label">Floral</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);">💙<span class="gallery-label">Minimal</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fff8e1,#ffe082);">✨<span class="gallery-label">Glitter</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#f3e5f5,#ce93d8);">💜<span class="gallery-label">Ombre</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fce4ec,#f48fb1);">🎀<span class="gallery-label">French rose</span></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#e8f5e9,#a5d6a7);">🌿<span class="gallery-label">Nude</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVAS -->
+<section class="booking" id="reservas">
+  <div class="container">
+    <span class="section-tag">Agenda tu lugar</span>
+    <h2 class="section-title">Reservá tu turno</h2>
+    <p class="section-sub">Elegí el día y horario que mejor te quede</p>
+    <div class="booking-box">
+      <div style="margin-bottom:1rem;">
+        <p style="font-size:13px;color:var(--text-soft);margin-bottom:10px;">Horarios disponibles esta semana:</p>
+        <div class="slots-row">
+          <span class="slot" onclick="selectSlot(this)">Lun 10:00</span>
+          <span class="slot" onclick="selectSlot(this)">Mar 14:00</span>
+          <span class="slot" onclick="selectSlot(this)">Mié 11:00</span>
+          <span class="slot" onclick="selectSlot(this)">Jue 16:00</span>
+          <span class="slot" onclick="selectSlot(this)">Vie 09:00</span>
+          <span class="slot" onclick="selectSlot(this)">Sáb 13:00</span>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input id="r-nombre" type="text" placeholder="Valentina García">
+        </div>
+        <div class="form-group">
+          <label>Teléfono / WhatsApp</label>
+          <input id="r-tel" type="text" placeholder="11 1234-5678">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Servicio</label>
+          <select id="r-servicio">
+            <option>Esmaltado semipermanente</option>
+            <option>Esculpidas en gel</option>
+            <option>Nail art</option>
+            <option>Manicura tradicional</option>
+            <option>Pedicura completa</option>
+            <option>Tratamiento de keratina</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha preferida</label>
+          <input id="r-fecha" type="date">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:1.5rem;">
+        <label>Nota (opcional)</label>
+        <input id="r-nota" type="text" placeholder="Traer referencia, alergia a gel, etc.">
+      </div>
+      <button class="btn-primary" onclick="reservar()">Confirmar reserva</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="container">
+    <span class="section-tag">Opiniones</span>
+    <h2 class="section-title">Lo que dicen nuestras clientas</h2>
+    <p class="section-sub">Reseñas reales, amor real</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Las uñas más lindas que me hicieron en mi vida. El detalle del nail art es increíble."</p>
+        <div class="testi-name">— Valentina R.</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"El semipermanente me duró más de 3 semanas sin despegarse. Re recomiendo."</p>
+        <div class="testi-name">— Camila S.</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Ambiente hermoso y atención divina. Ya soy clienta fija de Bella Nails."</p>
+        <div class="testi-name">— Lucía M.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN PANEL -->
+<section class="admin" id="admin">
+  <div class="container">
+    <span class="section-tag">Panel privado</span>
+    <h2 class="section-title">Gestión de turnos</h2>
+    <p class="section-sub">Administrá tus reservas semanales</p>
+    <div class="admin-box">
+      <div class="admin-tabs">
+        <div class="admin-tab active" onclick="showAdminTab('semana',this)">Vista semanal</div>
+        <div class="admin-tab" onclick="showAdminTab('lista',this)">Lista por orden</div>
+        <div class="admin-tab" onclick="showAdminTab('nuevo',this)">+ Nuevo turno</div>
+      </div>
+      <div class="admin-content">
+        <div id="ap-semana">
+          <div class="stats-row" id="statsRow"></div>
+          <div class="week-nav">
+            <button class="nav-btn" onclick="changeWeek(-1)">← Anterior</button>
+            <span class="week-label" id="weekLabel"></span>
+            <button class="nav-btn" onclick="changeWeek(1)">Siguiente →</button>
+          </div>
+          <div class="week-grid" id="weekGrid"></div>
+        </div>
+        <div id="ap-lista" style="display:none;">
+          <div style="display:flex;gap:10px;margin-bottom:1rem;align-items:center;flex-wrap:wrap;">
+            <select onchange="filtrarLista(this.value)" style="border:0.5px solid var(--pink-border);border-radius:8px;padding:7px 10px;font-family:inherit;font-size:13px;color:var(--text-main);outline:none;">
+              <option value="todos">Todos los estados</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="completado">Completado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+            <span style="font-size:12px;color:var(--pink-mid);" id="listaCount"></span>
+          </div>
+          <div style="background:var(--white);border:0.5px solid var(--pink-border);border-radius:12px;overflow:hidden;">
+            <div class="lista-header">
+              <span>Fecha y hora</span><span>Cliente</span><span>Servicio</span><span>Estado</span><span>Acción</span>
+            </div>
+            <div id="listaBody"></div>
+          </div>
+        </div>
+        <div id="ap-nuevo" style="display:none;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div class="form-group"><label>Nombre del cliente</label><input id="a-nombre" type="text" placeholder="Valentina García"></div>
+            <div class="form-group"><label>Teléfono</label><input id="a-tel" type="text" placeholder="11 1234-5678"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div class="form-group"><label>Servicio</label>
+              <select id="a-servicio">
+                <option>Esmaltado semipermanente</option>
+                <option>Esculpidas en gel</option>
+                <option>Nail art</option>
+                <option>Manicura tradicional</option>
+                <option>Pedicura completa</option>
+                <option>Tratamiento de keratina</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Precio</label><input id="a-precio" type="text" placeholder="$8.000"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div class="form-group"><label>Fecha</label><input id="a-fecha" type="date"></div>
+            <div class="form-group"><label>Hora</label><input id="a-hora" type="time"></div>
+          </div>
+          <div class="form-group" style="margin-bottom:1.5rem;"><label>Nota</label><input id="a-nota" type="text" placeholder="Observaciones"></div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn-primary" onclick="agregarTurno()">Guardar turno</button>
+            <button class="btn-outline" onclick="showAdminTab('semana',null)">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">✦ Bella Nails</div>
+  <div class="footer-info">
+    📍 Buenos Aires, Argentina<br>
+    📱 WhatsApp: +54 11 1234-5678<br>
+    🕐 Lun a Sáb de 9:00 a 19:00 hs
+  </div>
+  <div class="footer-socials">
+    <a href="#">📸</a>
+    <a href="#">🎵</a>
+    <a href="#">💬</a>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-copy">© 2026 Bella Nails. Todos los derechos reservados.</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ESTADOS = {
+  pendiente:  {label:'Pendiente',  bg:'#fff3e0',color:'#e65100'},
+  confirmado: {label:'Confirmado', bg:'#e8f5e9',color:'#2e7d32'},
+  completado: {label:'Completado', bg:'#e3f2fd',color:'#1565c0'},
+  cancelado:  {label:'Cancelado',  bg:'#fce4ec',color:'#880e4f'},
+};
+let turnos=[
+  {id:1,nombre:'Valentina R.',tel:'',servicio:'Esmaltado semipermanente',precio:'$8.000',fecha:'2026-06-22',hora:'10:00',estado:'completado',nota:''},
+  {id:2,nombre:'Camila S.',tel:'',servicio:'Esculpidas en gel',precio:'$15.000',fecha:'2026-06-22',hora:'12:00',estado:'completado',nota:''},
+  {id:3,nombre:'Lucía M.',tel:'',servicio:'Nail art',precio:'$5.000',fecha:'2026-06-23',hora:'11:00',estado:'confirmado',nota:'Diseño floral'},
+  {id:4,nombre:'Sofía P.',tel:'',servicio:'Manicura tradicional',precio:'$4.500',fecha:'2026-06-24',hora:'09:00',estado:'confirmado',nota:''},
+  {id:5,nombre:'Martina G.',tel:'',servicio:'Pedicura completa',precio:'$6.500',fecha:'2026-06-25',hora:'14:00',estado:'pendiente',nota:''},
+  {id:6,nombre:'Agustina T.',tel:'',servicio:'Esmaltado semipermanente',precio:'$8.000',fecha:'2026-06-26',hora:'10:00',estado:'pendiente',nota:''},
+  {id:7,nombre:'Florencia V.',tel:'',servicio:'Esculpidas en gel',precio:'$15.000',fecha:'2026-06-27',hora:'15:00',estado:'pendiente',nota:'Largo extra'},
+  {id:8,nombre:'Rocío B.',tel:'',servicio:'Tratamiento de keratina',precio:'$7.000',fecha:'2026-06-28',hora:'11:00',estado:'pendiente',nota:''},
+];
+let nextId=9, weekOffset=0, filtroEstado='todos';
+
+function getWeekDates(off){
+  const base=new Date(2026,5,22);
+  const mon=new Date(base);
+  mon.setDate(base.getDate()+off*7);
+  return Array.from({length:6},(_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d;});
+}
+function fmt(d){return d.toISOString().split('T')[0];}
+function fmtDisp(d){return d.toLocaleDateString('es-AR',{weekday:'short',day:'numeric',month:'short'});}
+
+function renderStats(){
+  const sem=getWeekDates(weekOffset).map(fmt);
+  const enSem=turnos.filter(t=>sem.includes(t.fecha)).length;
+  const pend=turnos.filter(t=>t.estado==='pendiente').length;
+  const comp=turnos.filter(t=>t.estado==='completado').length;
+  document.getElementById('statsRow').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${turnos.length}</div><div class="stat-lbl">Total turnos</div></div>
+    <div class="stat-card"><div class="stat-num">${enSem}</div><div class="stat-lbl">Esta semana</div></div>
+    <div class="stat-card"><div class="stat-num">${pend}</div><div class="stat-lbl">Pendientes</div></div>
+    <div class="stat-card"><div class="stat-num">${comp}</div><div class="stat-lbl">Completados</div></div>`;
+}
+function renderWeek(){
+  const days=getWeekDates(weekOffset);
+  document.getElementById('weekLabel').textContent=fmtDisp(days[0])+' — '+fmtDisp(days[5]);
+  const DIAS=['Lun','Mar','Mié','Jue','Vie','Sáb'];
+  document.getElementById('weekGrid').innerHTML=days.map((day,i)=>{
+    const key=fmt(day);
+    const dt=turnos.filter(t=>t.fecha===key).sort((a,b)=>a.hora.localeCompare(b.hora));
+    const chips=dt.map(t=>{
+      const e=ESTADOS[t.estado];
+      return `<div class="turno-chip" onclick="alert('${t.nombre}\\n${t.servicio}\\n${t.hora}\\nEstado: ${e.label}')">
+        <div class="chip-hora">${t.hora}</div>
+        <div class="chip-nombre">${t.nombre.split(' ')[0]}</div>
+        <span class="chip-estado" style="background:${e.bg};color:${e.color};">${e.label}</span>
+      </div>`;
+    }).join('')||'<div class="empty-day">—</div>';
+    const isToday=key==='2026-06-25';
+    return `<div class="day-col" style="${isToday?'border:1.5px solid #e91e8c;':''}">
+      <div class="day-header" style="${isToday?'background:#e91e8c;color:#fff;':''}">${DIAS[i]} ${day.getDate()}</div>
+      <div class="day-body">${chips}</div></div>`;
+  }).join('');
+  renderStats();
+}
+function renderLista(){
+  const fil=turnos.filter(t=>filtroEstado==='todos'||t.estado===filtroEstado)
+    .sort((a,b)=>(a.fecha+a.hora).localeCompare(b.fecha+b.hora));
+  document.getElementById('listaCount').textContent=fil.length+' turno'+(fil.length!==1?'s':'');
+  if(!fil.length){document.getElementById('listaBody').innerHTML='<div style="padding:2rem;text-align:center;color:#ccc;font-size:13px;">Sin resultados</div>';return;}
+  document.getElementById('listaBody').innerHTML=fil.map(t=>{
+    const e=ESTADOS[t.estado];
+    const d=new Date(t.fecha+'T12:00:00');
+    const fs=d.toLocaleDateString('es-AR',{day:'numeric',month:'short'})+' '+t.hora;
+    return `<div class="lista-row">
+      <span style="font-size:12px;color:#888;">${fs}</span>
+      <span style="font-weight:600;color:#880e4f;">${t.nombre}</span>
+      <span style="font-size:12px;color:#888;">${t.servicio}</span>
+      <span><span class="estado-badge" style="background:${e.bg};color:${e.color};">${e.label}</span></span>
+      <span style="display:flex;gap:3px;">
+        ${t.estado==='pendiente'?`<button class="accion-btn" style="background:#e8f5e9;color:#2e7d32;" onclick="cambiarEstado(${t.id},'confirmado')">✓</button>`:''}
+        ${t.estado==='confirmado'?`<button class="accion-btn" style="background:#e3f2fd;color:#1565c0;" onclick="cambiarEstado(${t.id},'completado')">✓✓</button>`:''}
+        ${(t.estado!=='cancelado'&&t.estado!=='completado')?`<button class="accion-btn" style="background:#fce4ec;color:#880e4f;" onclick="cambiarEstado(${t.id},'cancelado')">✕</button>`:''}
+      </span>
+    </div>`;
+  }).join('');
+}
+function cambiarEstado(id,st){turnos=turnos.map(t=>t.id===id?{...t,estado:st}:t);renderWeek();renderLista();showToast('Estado actualizado');}
+function filtrarLista(v){filtroEstado=v;renderLista();}
+function changeWeek(d){weekOffset+=d;renderWeek();}
+function agregarTurno(){
+  const nombre=document.getElementById('a-nombre').value.trim();
+  const fecha=document.getElementById('a-fecha').value;
+  const hora=document.getElementById('a-hora').value;
+  if(!nombre||!fecha||!hora){showToast('Completá nombre, fecha y hora');return;}
+  turnos.push({id:nextId++,nombre,tel:document.getElementById('a-tel').value,servicio:document.getElementById('a-servicio').value,precio:document.getElementById('a-precio').value,fecha,hora,estado:'pendiente',nota:document.getElementById('a-nota').value});
+  ['a-nombre','a-tel','a-precio','a-hora','a-nota','a-fecha'].forEach(id=>document.getElementById(id).value='');
+  renderWeek();renderLista();showAdminTab('semana',null);showToast('Turno agregado');
+}
+function reservar(){
+  const nombre=document.getElementById('r-nombre').value.trim();
+  const fecha=document.getElementById('r-fecha').value;
+  if(!nombre||!fecha){showToast('Completá nombre y fecha');return;}
+  turnos.push({id:nextId++,nombre,tel:document.getElementById('r-tel').value,servicio:document.getElementById('r-servicio').value,precio:'',fecha,hora:'10:00',estado:'pendiente',nota:document.getElementById('r-nota').value});
+  ['r-nombre','r-tel','r-nota','r-fecha'].forEach(id=>document.getElementById(id).value='');
+  renderWeek();showToast('¡Reserva recibida! Te contactamos pronto.');
+  document.getElementById('admin').scrollIntoView({behavior:'smooth'});
+}
+function selectSlot(el){document.querySelectorAll('.slot').forEach(s=>s.classList.remove('sel'));el.classList.add('sel');}
+function showAdminTab(name,btn){
+  ['semana','lista','nuevo'].forEach(n=>document.getElementById('ap-'+n).style.display=n===name?'block':'none');
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  else document.querySelectorAll('.admin-tab')[0].classList.add('active');
+  if(name==='lista')renderLista();
+  if(name==='semana')renderWeek();
+}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+
+document.getElementById('r-fecha').value=new Date(2026,5,25).toISOString().split('T')[0];
+document.getElementById('a-fecha').value=new Date(2026,5,25).toISOString().split('T')[0];
+document.getElementById('a-hora').value='10:00';
+renderWeek();
+</script>
+</body>
+</html>
